@@ -16,16 +16,22 @@ numGenerations = 2;
 selectedPhrase = 'fox';
 selectionStrength = 0.7;
 
+if length(selectedPhrase) == 3
+    phraseLocation = animal;
+end
+if length(selectedPhrase) == 4
+    phraseLocation = object;
+end
+
 %% Mutate
 
 for g = 1:numGenerations
-
 
 for j=numOffspring:-1:1
     mutatedCode(j,:) = mutateSeq(geeNumOriginalCode, mutationRate, outOf);
     mutatedGnome(j,:) = translategNum(mutatedCode(j,:),lookup);
 end
-numUn
+numUniqueVariants = length(unique(mutatedGnome(:,phraseLocation)));
 
 
 IDX = selectorFunction(mutatedGnome, animal, 'fox', 1);
@@ -44,12 +50,6 @@ end
 
 
 
-if length(selectedPhrase) == 3
-    phraseLocation = animal;
-end
-if length(selectedPhrase) == 4
-    phraseLocations = object;
-end
 
 
 
