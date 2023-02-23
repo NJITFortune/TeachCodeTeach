@@ -35,14 +35,14 @@ numUniqueVariants = length(unique(mutatedGnome(:,phraseLocation)));
 
 
 IDX = selectorFunction(mutatedGnome, animal, 'fox', 1);
-    nonIDX = 1:length(mutatedGnome) ~= IDX;
+    nonIDX = setdiff(1:length(mutatedGnome), IDX);
 
 fprintf('Generation: %i \n', g);
 fprintf('Produced %i offspring: %i maintained trait, %i mutated to generate %i variations.\n', numOffspring, length(IDX), numOffspring - length(IDX), numUniqueVariants);
 fprintf('Survivors: \n')
     mutatedGnome(IDX(randi([1 length(IDX)], 1, numVariantsDisplay)),:)
 fprintf('Non-surivors: \n')
-    
+    mutatedGnome(nonIDX(randi([1 length(nonIDX)], 1, numVariantsDisplay)),:)    
 end
 
 
