@@ -1,6 +1,6 @@
 clear all
 
-[animal, object, lookup] = setUpGeneticCodes;
+[animal, object, lookup, geeNumOriginalCode] = setUpGeneticCodes;
 
 %% User Settings
 
@@ -39,11 +39,7 @@ end
 
 %% Setup the phrase
 
-geeNumOriginalCode = [1,1,1,4,1,1,1,1,1,4,1,1,1,1,1,3,4,4,4,3,1,1,1,1,1,1,4,1,1,1,1,4,1,1,1,4,1,1,1,1,3,1,4,1,4];
-geeGnomeOriginal = translategNum(geeNumOriginalCode, lookup);
 
-fprintf('The original Phrase is:\n')
-geeGnomeOriginal
 
 
 if length(selectedPhrase) == 3
@@ -57,7 +53,7 @@ end
 
 
 %% Genetic Code
-function [animal, object, lookup] = setUpGeneticCodes
+function [animal, object, lookup, geeNumOriginalCode] = setUpGeneticCodes
 animal = 17:19;
 object = 42:45;
 
@@ -108,6 +104,12 @@ lookup(42,:) = 'mprt';
 lookup(43,:) = 'aeio';
 lookup(44,:) = 'opli';
 lookup(45,:) = 'efln';
+
+geeNumOriginalCode = [1,1,1,4,1,1,1,1,1,4,1,1,1,1,1,3,4,4,4,3,1,1,1,1,1,1,4,1,1,1,1,4,1,1,1,4,1,1,1,1,3,1,4,1,4];
+geeGnomeOriginal = translategNum(geeNumOriginalCode, lookup);
+
+fprintf('The original Phrase is:\n')
+geeGnomeOriginal
 
 end
 
