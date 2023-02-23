@@ -55,7 +55,7 @@ fprintf('%i were not selected with a total of %i variations.\n', numOffspring - 
 fprintf('The other trait started as %s \n', otherPhrase)
 fprintf('Survivors: \n')
     if ~isempty(IDX)
-        mutatedGnome(IDX(randi([1 length(IDX)], 1, min([length(IDX), numVariantsDisplay])),:)
+        mutatedGnome(IDX(randi([1 length(IDX)], 1, min([length(IDX), numVariantsDisplay]))),:)
     else
         fprintf('There were no survivors.\n')
     end
