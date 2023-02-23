@@ -10,7 +10,7 @@ numVariantsDisplay = 10;
     mutationRate = 0.01;
     outOf = 100000; % Probably do not change this value
 
-numOffspring = 1000;
+numOffspring = 100;
 numGenerations = 2;
 
 % Original: fox  Variants: dog cow cat bat fax bot box fog fix
