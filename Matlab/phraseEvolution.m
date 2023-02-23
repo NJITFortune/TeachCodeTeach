@@ -44,14 +44,14 @@ for j=numOffspring:-1:1
     mutatedCode(j,:) = mutateSeq(geeNumOriginalCode, mutationRate, outOf);
     mutatedGnome(j,:) = translategNum(mutatedCode(j,:),lookup);
 end
-    numUniqueVariants = length(unique(string(mutatedGnome(:, phraseLocation))));
+    [~, UniqueVariantsIDX] = unique(string(mutatedGnome(:, phraseLocation)));
 
 IDX = selectorFunction(mutatedGnome, animal, selectedPhrase, 1);
     nonIDX = setdiff(1:length(mutatedGnome), IDX);
 
 fprintf('Generation: %i \n', g);
 fprintf('Produced %i offspring: %i had the selected trait %s.\n', numOffspring, length(IDX), selectedPhrase);
-fprintf('%i were not selected with a total of %i variations.\n', numOffspring - length(IDX), numUniqueVariants);
+fprintf('%i were not selected with a total of %i variations.\n', numOffspring - length(IDX), length(UniqueVariantsIDX));
 fprintf('The other trait started as %s \n', otherPhrase)
 fprintf('Survivors: \n')
     if ~isempty(IDX)
