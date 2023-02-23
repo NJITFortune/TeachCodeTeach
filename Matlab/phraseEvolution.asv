@@ -1,5 +1,7 @@
 clear all
 
+[setUpGeneticCodes;
+
 %% Settings
 
 % How many variants to show
@@ -10,12 +12,31 @@ outOf = 100000;
 
 numOffspring = 10000;
 generations = 2;
-Selection = [];
 
-animal = 17:19;
-object = 42:45;
+selectedPhrase = 'fox';
+selectionStrength = 0.7;
+
+if length(selectedPhrase) == 3
+    phraseLocation = animal;
+elseif length(selectedPhrase) == 4
+    phraseLocations = object;
+end
+
+
+
+
+%% Setup the phrase
+
+geeNumOriginalCode = [1,1,1,4,1,1,1,1,1,4,1,1,1,1,1,3,4,4,4,3,1,1,1,1,1,1,4,1,1,1,1,4,1,1,1,4,1,1,1,1,3,1,4,1,4];
+geeGnomeOriginal = translategNum(geeNumOriginalCode, lookup);
+
+fprintf('The original Phrase is:\n')
+geeGnomeOriginal
 
 %% Genetic Code
+function [animal object lookup] = setUpGeneticCodes
+animal = 17:19;
+object = 42:45;
 
 lookup(1,:) = 'tpcb';
 lookup(2,:) = 'hoae';
@@ -65,13 +86,7 @@ lookup(43,:) = 'aeio';
 lookup(44,:) = 'opli';
 lookup(45,:) = 'efln';
 
-%% Setup the phrase
-
-geeNumOriginalCode = [1,1,1,4,1,1,1,1,1,4,1,1,1,1,1,3,4,4,4,3,1,1,1,1,1,1,4,1,1,1,1,4,1,1,1,4,1,1,1,1,3,1,4,1,4];
-geeGnomeOriginal = translategNum(geeNumOriginalCode, lookup);
-
-fprintf('The original Phrase is:\n')
-geeGnomeOriginal
+end
 
 %% Mutate
 
