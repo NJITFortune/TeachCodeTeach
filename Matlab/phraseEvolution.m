@@ -76,7 +76,7 @@ end
 
 IDX = selectorFunction(mutatedGnome, animal, 'fox', 1);
 
-mutatedGnome(IDX(randi(1:length(IDX),numVariantsDisplay)),:)
+mutatedGnome(IDX(randi([1 length(IDX)],numVariantsDisplay)),:)
 length(IDX) / numOffspring
 
 
