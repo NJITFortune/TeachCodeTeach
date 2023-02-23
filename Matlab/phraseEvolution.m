@@ -1,5 +1,7 @@
 clear all
 
+[animal, object, lookup] = setUpGeneticCodes;
+
 %% Settings
 
 % How many variants to show
@@ -10,12 +12,32 @@ outOf = 100000;
 
 numOffspring = 10000;
 generations = 2;
-Selection = [];
 
-animal = 17:19;
-object = 42:45;
+selectedPhrase = 'fox';
+selectionStrength = 0.7;
+
+if length(selectedPhrase) == 3
+    phraseLocation = animal;
+end
+if length(selectedPhrase) == 4
+    phraseLocations = object;
+end
+
+
+
+
+%% Setup the phrase
+
+geeNumOriginalCode = [1,1,1,4,1,1,1,1,1,4,1,1,1,1,1,3,4,4,4,3,1,1,1,1,1,1,4,1,1,1,1,4,1,1,1,4,1,1,1,1,3,1,4,1,4];
+geeGnomeOriginal = translategNum(geeNumOriginalCode, lookup);
+
+fprintf('The original Phrase is:\n')
+geeGnomeOriginal
 
 %% Genetic Code
+function [animal, object, lookup] = setUpGeneticCodes
+animal = 17:19;
+object = 42:45;
 
 lookup(1,:) = 'tpcb';
 lookup(2,:) = 'hoae';
@@ -65,19 +87,27 @@ lookup(43,:) = 'aeio';
 lookup(44,:) = 'opli';
 lookup(45,:) = 'efln';
 
-%% Setup the phrase
+end
 
-geeNumOriginalCode = [1,1,1,4,1,1,1,1,1,4,1,1,1,1,1,3,4,4,4,3,1,1,1,1,1,1,4,1,1,1,1,4,1,1,1,4,1,1,1,1,3,1,4,1,4];
-geeGnome = translategNum(geeNumOriginalCode, lookup);
+%% Mutate
+
+for g = 1:generations
 
 for j=numOffspring:-1:1
-    mutatedGnome(j,:) = translategNum(mutateSeq(geeNumOriginalCode, mutationRate, outOf),lookup);
+    mutatedCode(j,:) = mutateSeq(geeNumOriginalCode, mutationRate, outOf);
+    mutatedGnome(j,:) = translategNum(mutatedCode(j,:),lookup);
 end
 
 IDX = selectorFunction(mutatedGnome, animal, 'fox', 1);
 
-mutatedGnome(IDX(randi([1 length(IDX)], 1, numVariantsDisplay)),:)
-length(IDX) / numOffspring
+
+fprintf('Generation: %i', g);
+fprintf('Produced %i offspring: %i maintained trait, %i mutated to generate %1 variations.\n', numOffspring, length(IDX), numOffspring - length(IDX), numUniqueVariants);
+    mutatedGnome(IDX(randi([1 length(IDX)], 1, numVariantsDisplay)),:)
+
+end
+
+
 
 
 %% Translate
@@ -94,12 +124,12 @@ function newSeq = mutateSeq(oldSeq, mutateRate, outOfnum)
 
 newSeq = oldSeq;
 
-mutateOrNot = randi([1 outOfnum],1,45);
-randSeq = randi([1 4],1,45);
+    mutateOrNot = randi([1 outOfnum],1,45);
+    randSeq = randi([1 4],1,45);
 
-thresh = outOfnum * mutateRate;
+    thresh = outOfnum * mutateRate;
 
-newSeq(mutateOrNot <= thresh) = randSeq(mutateOrNot <= thresh);
+    newSeq(mutateOrNot <= thresh) = randSeq(mutateOrNot <= thresh);
 
 end
 
@@ -107,14 +137,14 @@ end
 %% Selection
 function survivorsIDX = selectorFunction(currGenome, searchidxs, seq, selectionStrength)
 
-    survivorsIDX = [];
+    survivorsIDX = []; 
     for j = length(currGenome):-1:1
         if currGenome(j,searchidxs) == seq
             survivorsIDX(end+1) = j;
         end
     end
 
-    numberOfOthers = round(length(survivorsIDX) - (length(survivorsIDX) * selectionStrength))
+    numberOfOthers = round(length(survivorsIDX) - (length(survivorsIDX) * selectionStrength));
 
     if numberOfOthers > 0
 
