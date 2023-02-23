@@ -2,6 +2,9 @@ clear all
 
 %% Settings
 
+% How many variants to show
+numVariantsDisplay = 40;
+
 mutationRate = 0.0125;
 outOf = 100000;
 
@@ -73,7 +76,7 @@ end
 
 IDX = selectorFunction(mutatedGnome, animal, 'fox', 1);
 
-% mutatedGnome(IDX,:);
+mutatedGnome(IDX(numVariantsDisplay),:)
 length(IDX) / numOffspring
 
 
