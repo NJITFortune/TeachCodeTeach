@@ -8,7 +8,7 @@ clear all
 numVariantsDisplay = 5;
 
 % Mutation rate per generation per letter (probability of changing)
-    mutationRate = 0.01;
+    mutationRate = 0.1;
 
 % How many offsrping per generation    
     numOffspring = 10000;

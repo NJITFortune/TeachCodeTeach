@@ -8,7 +8,7 @@ clear all
 numVariantsDisplay = 5;
 
 % Mutation rate per generation per letter (probability of changing)
-    mutationRate = 0.01;
+    mutationRate = 0.1;
 
 % How many offsrping per generation    
     numOffspring = 10000;
@@ -19,7 +19,7 @@ numVariantsDisplay = 5;
 
 % Original: fox  Variants: dog cow cat bat fax bot box fog fix
 % Original: moon Variants: roof rope pope pole mole rail pail mail tape toll tale tool peon
-selectedPhrase = 'dog';
+selectedPhrase = 'fog';
 selectionStrength = 0.7;
 
 
@@ -28,10 +28,12 @@ outOf = 100000; % Probably do not change this value
 if length(selectedPhrase) == 3
     phraseLocation = animal;
     otherPhrase = translategNum(geeNumOriginalCode,lookup);
-    otherPhrase = otherPhrase(ob)
+    otherPhrase = otherPhrase(object);
 end
 if length(selectedPhrase) == 4
     phraseLocation = object;
+    otherPhrase = translategNum(geeNumOriginalCode,lookup);
+    otherPhrase = otherPhrase(animal);
 end
 
 %% Mutate
@@ -42,18 +44,18 @@ for j=numOffspring:-1:1
     mutatedCode(j,:) = mutateSeq(geeNumOriginalCode, mutationRate, outOf);
     mutatedGnome(j,:) = translategNum(mutatedCode(j,:),lookup);
 end
-    numUniqueVariants = length(unique(string(mutatedGnome(:, phraseLocation))));
+    [~, UniqueVariantsIDX] = unique(string(mutatedGnome(:, phraseLocation)));
 
 IDX = selectorFunction(mutatedGnome, animal, selectedPhrase, 1);
     nonIDX = setdiff(1:length(mutatedGnome), IDX);
 
 fprintf('Generation: %i \n', g);
 fprintf('Produced %i offspring: %i had the selected trait %s.\n', numOffspring, length(IDX), selectedPhrase);
-fprintf('%i were not selected with a total of %i variations.\n', numOffspring - length(IDX), numUniqueVariants);
-fprintf('The other trait %s', )
+fprintf('%i were not selected with a total of %i variations.\n', numOffspring - length(IDX), length(UniqueVariantsIDX));
+fprintf('The other trait started as %s \n', otherPhrase)
 fprintf('Survivors: \n')
     if ~isempty(IDX)
-        mutatedGnome(IDX(randi([1 length(IDX)], 1, numVariantsDisplay)),:)
+        mutatedGnome(IDX(randi([1 length(IDX)], 1, min([length(IDX), numVariantsDisplay]))),:)
     else
         fprintf('There were no survivors.\n')
     end
