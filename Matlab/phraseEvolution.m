@@ -7,7 +7,7 @@ clear all
 % How many variants to show
 numVariantsDisplay = 4;
 
-    mutationRate = 0.1;
+    mutationRate = 0.001;
     outOf = 100000; % Probably do not change this value
 
 numOffspring = 10000;
@@ -35,18 +35,15 @@ numUniqueVariants = length(unique(mutatedGnome(:,phraseLocation)));
 
 
 IDX = selectorFunction(mutatedGnome, animal, 'fox', 1);
+    nonIDX = 1:length(mutatedGnome) ~= IDX;
 
 fprintf('Generation: %i \n', g);
 fprintf('Produced %i offspring: %i maintained trait, %i mutated to generate %i variations.\n', numOffspring, length(IDX), numOffspring - length(IDX), numUniqueVariants);
+fprintf('Survivors: \n')
     mutatedGnome(IDX(randi([1 length(IDX)], 1, numVariantsDisplay)),:)
-
+fprintf('Non-surivors: \n')
+    
 end
-
-
-
-
-%% Setup the phrase
-
 
 
 
