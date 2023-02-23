@@ -7,17 +7,23 @@ clear all
 % How many variants to show
 numVariantsDisplay = 5;
 
-% Mutation rate per generation per letter (probab
+% Mutation rate per generation per letter (probability of changing)
     mutationRate = 0.01;
-    outOf = 100000; % Probably do not change this value
 
-numOffspring = 1000;
-numGenerations = 2;
+% How many offsrping per generation    
+    numOffspring = 10000;
+% How many generations
+    numGenerations = 2;
+% We only allow 1 survivor per generation for the next generation
+
 
 % Original: fox  Variants: dog cow cat bat fax bot box fog fix
 % Original: moon Variants: roof rope pope pole mole rail pail mail tape toll tale tool peon
-selectedPhrase = 'fox';
+selectedPhrase = 'dog';
 selectionStrength = 0.7;
+
+
+outOf = 100000; % Probably do not change this value
 
 if length(selectedPhrase) == 3
     phraseLocation = animal;
@@ -37,18 +43,22 @@ end
     numUniqueVariants = length(unique(string(mutatedGnome(:, phraseLocation))));
 
 
-IDX = selectorFunction(mutatedGnome, animal, 'fox', 1);
+IDX = selectorFunction(mutatedGnome, animal, selectedPhrase, 1);
     nonIDX = setdiff(1:length(mutatedGnome), IDX);
 
 fprintf('Generation: %i \n', g);
-fprintf('Produced %i offspring: %i maintained trait, %i mutated to generate %i variations.\n', numOffspring, length(IDX), numOffspring - length(IDX), numUniqueVariants);
+fprintf('Produced %i offspring: %i maintained selected trait, %i mutated to generate %i variations.\n', numOffspring, length(IDX), numOffspring - length(IDX), numUniqueVariants);
 fprintf('Survivors: \n')
     if ~isempty(IDX)
         mutatedGnome(IDX(randi([1 length(IDX)], 1, numVariantsDisplay)),:)
+    else
+        fprintf('There were no survivors.\n')
     end
 fprintf('Non-surivors: \n')
     if ~isempty(nonIDX)
         mutatedGnome(nonIDX(randi([1 length(nonIDX)], 1, numVariantsDisplay)),:)    
+    else
+        fprintf('Everyone surivived.\n')
     end
 end
 
