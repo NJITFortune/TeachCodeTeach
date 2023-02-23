@@ -42,9 +42,13 @@ IDX = selectorFunction(mutatedGnome, animal, 'fox', 1);
 fprintf('Generation: %i \n', g);
 fprintf('Produced %i offspring: %i maintained trait, %i mutated to generate %i variations.\n', numOffspring, length(IDX), numOffspring - length(IDX), numUniqueVariants);
 fprintf('Survivors: \n')
-    mutatedGnome(IDX(randi([1 length(IDX)], 1, numVariantsDisplay)),:)
+    if ~isempty(IDX)
+        mutatedGnome(IDX(randi([1 length(IDX)], 1, numVariantsDisplay)),:)
+    end
 fprintf('Non-surivors: \n')
-    mutatedGnome(nonIDX(randi([1 length(nonIDX)], 1, numVariantsDisplay)),:)    
+    if ~isempty(nonIDX)
+        mutatedGnome(nonIDX(randi([1 length(nonIDX)], 1, numVariantsDisplay)),:)    
+    end
 end
 
 
