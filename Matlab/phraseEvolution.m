@@ -5,9 +5,9 @@ clear all
 %% User Settings
 
 % How many variants to show
-numVariantsDisplay = 10;
+numVariantsDisplay = 4;
 
-    mutationRate = 0.0125;
+    mutationRate = 0.001;
     outOf = 100000; % Probably do not change this value
 
 numOffspring = 10000;
