@@ -13,18 +13,19 @@ numVariantsDisplay = 5;
 % How many offsrping per generation    
     numOffspring = 10000;
 
-
 % Original: fox  Variants: dog cow cat bat fax bot box fog fix
 % Original: moon Variants: roof rope pope pole mole rail pail mail tape toll tale tool peon
 selectedPhrase = 'fog';
-selectionStrength = 0.7;
+
 
 %% System settings
 
 % How many generations
     numGenerations = 1;
+% How strong is selection?
+    selectionStrength = 1;
 
-outOf = 100000; % Probably do not change this value
+    outOf = 100000; % Probably do not change this value
 
 if length(selectedPhrase) == 3
     phraseLocation = animal;
