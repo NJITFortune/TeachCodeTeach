@@ -33,7 +33,7 @@ for j=numOffspring:-1:1
     mutatedCode(j,:) = mutateSeq(geeNumOriginalCode, mutationRate, outOf);
     mutatedGnome(j,:) = translategNum(mutatedCode(j,:),lookup);
 end
-numUniqueVariants = length(unique(mutatedGnome(:, phraseLocation)));
+numUniqueVariants = length(unique(string(mutatedGnome(:, phraseLocation))));
 
 
 IDX = selectorFunction(mutatedGnome, animal, 'fox', 1);
