@@ -11,7 +11,7 @@ numVariantsDisplay = 5;
     mutationRate = 0.01;
 
 % How many offsrping per generation    
-    numOffspring = 10000;
+    numOffspring = 100000;
 % How many generations
     numGenerations = 2;
 % We only allow 1 survivor per generation for the next generation
