@@ -68,16 +68,30 @@ lookup(45,:) = 'efln';
 %% Setup the phrase
 
 geeNumOriginalCode = [1,1,1,4,1,1,1,1,1,4,1,1,1,1,1,3,4,4,4,3,1,1,1,1,1,1,4,1,1,1,1,4,1,1,1,4,1,1,1,1,3,1,4,1,4];
-geeGnome = translategNum(geeNumOriginalCode, lookup);
+geeGnomeOriginal = translategNum(geeNumOriginalCode, lookup);
+
+fprintf('The original Phrase is:\n')
+geeGnomeOriginal
+
+%% Mutate
+
+for g = 1:generations
 
 for j=numOffspring:-1:1
-    mutatedGnome(j,:) = translategNum(mutateSeq(geeNumOriginalCode, mutationRate, outOf),lookup);
+    mutatedCode(j,:) = mutateSeq(geeNumOriginalCode, mutationRate, outOf);
+    mutatedGnome(j,:) = translategNum(mutatedCode(j,:),lookup);
 end
 
 IDX = selectorFunction(mutatedGnome, animal, 'fox', 1);
 
-mutatedGnome(IDX(randi([1 length(IDX)], 1, numVariantsDisplay)),:)
+
+fprintf('Generation: %i', g);
 fprintf('Produced %i offspring: %i maintained trait, %i mutated to generate %1 variations.\n', numOffspring, length(IDX), numOffspring - length(IDX), numUniqueVariants);
+    mutatedGnome(IDX(randi([1 length(IDX)], 1, numVariantsDisplay)),:)
+
+end
+
+
 
 
 %% Translate
