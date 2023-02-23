@@ -7,7 +7,7 @@ clear all
 % How many variants to show
 numVariantsDisplay = 4;
 
-    mutationRate = 0.001;
+    mutationRate = 0.1;
     outOf = 100000; % Probably do not change this value
 
 numOffspring = 10000;
