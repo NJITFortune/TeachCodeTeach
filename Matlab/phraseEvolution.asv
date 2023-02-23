@@ -1,40 +1,65 @@
 clear all
 
-[setUpGeneticCodes;
+[animal, object, lookup, geeNumOriginalCode] = setUpGeneticCodes;
 
-%% Settings
+%% User Settings
 
 % How many variants to show
-numVariantsDisplay = 10;
+numVariantsDisplay = 5;
 
-mutationRate = 0.0125;
-outOf = 100000;
+% Mutation rate per generation per letter (probab
+    mutationRate = 0.01;
+    outOf = 100000; % Probably do not change this value
 
-numOffspring = 10000;
-generations = 2;
+numOffspring = 1000;
+numGenerations = 2;
 
+% Original: fox  Variants: dog cow cat bat fax bot box fog fix
+% Original: moon Variants: roof rope pope pole mole rail pail mail tape toll tale tool peon
 selectedPhrase = 'fox';
 selectionStrength = 0.7;
 
 if length(selectedPhrase) == 3
     phraseLocation = animal;
-elseif length(selectedPhrase) == 4
-    phraseLocations = object;
+end
+if length(selectedPhrase) == 4
+    phraseLocation = object;
+end
+
+%% Mutate
+
+for g = 1:numGenerations
+
+for j=numOffspring:-1:1
+    mutatedCode(j,:) = mutateSeq(geeNumOriginalCode, mutationRate, outOf);
+    mutatedGnome(j,:) = translategNum(mutatedCode(j,:),lookup);
+end
+    numUniqueVariants = length(unique(string(mutatedGnome(:, phraseLocation))));
+
+
+IDX = selectorFunction(mutatedGnome, animal, 'fox', 1);
+    nonIDX = setdiff(1:length(mutatedGnome), IDX);
+
+fprintf('Generation: %i \n', g);
+fprintf('Produced %i offspring: %i maintained trait, %i mutated to generate %i variations.\n', numOffspring, length(IDX), numOffspring - length(IDX), numUniqueVariants);
+fprintf('Survivors: \n')
+    if ~isempty(IDX)
+        mutatedGnome(IDX(randi([1 length(IDX)], 1, numVariantsDisplay)),:)
+    end
+fprintf('Non-surivors: \n')
+    if ~isempty(nonIDX)
+        mutatedGnome(nonIDX(randi([1 length(nonIDX)], 1, numVariantsDisplay)),:)    
+    end
 end
 
 
 
 
-%% Setup the phrase
 
-geeNumOriginalCode = [1,1,1,4,1,1,1,1,1,4,1,1,1,1,1,3,4,4,4,3,1,1,1,1,1,1,4,1,1,1,1,4,1,1,1,4,1,1,1,1,3,1,4,1,4];
-geeGnomeOriginal = translategNum(geeNumOriginalCode, lookup);
 
-fprintf('The original Phrase is:\n')
-geeGnomeOriginal
 
 %% Genetic Code
-function [animal object lookup] = setUpGeneticCodes
+function [animal, object, lookup, geeNumOriginalCode] = setUpGeneticCodes
 animal = 17:19;
 object = 42:45;
 
@@ -86,27 +111,13 @@ lookup(43,:) = 'aeio';
 lookup(44,:) = 'opli';
 lookup(45,:) = 'efln';
 
-end
+geeNumOriginalCode = [1,1,1,4,1,1,1,1,1,4,1,1,1,1,1,3,4,4,4,3,1,1,1,1,1,1,4,1,1,1,1,4,1,1,1,4,1,1,1,1,3,1,4,1,4];
+geeGnomeOriginal = translategNum(geeNumOriginalCode, lookup);
 
-%% Mutate
-
-for g = 1:generations
-
-for j=numOffspring:-1:1
-    mutatedCode(j,:) = mutateSeq(geeNumOriginalCode, mutationRate, outOf);
-    mutatedGnome(j,:) = translategNum(mutatedCode(j,:),lookup);
-end
-
-IDX = selectorFunction(mutatedGnome, animal, 'fox', 1);
-
-
-fprintf('Generation: %i', g);
-fprintf('Produced %i offspring: %i maintained trait, %i mutated to generate %1 variations.\n', numOffspring, length(IDX), numOffspring - length(IDX), numUniqueVariants);
-    mutatedGnome(IDX(randi([1 length(IDX)], 1, numVariantsDisplay)),:)
+fprintf('The original Phrase is:\n')
+geeGnomeOriginal
 
 end
-
-
 
 
 %% Translate
