@@ -51,10 +51,14 @@ fprintf('Produced %i offspring: %i maintained trait, %i mutated to generate %i v
 fprintf('Survivors: \n')
     if ~isempty(IDX)
         mutatedGnome(IDX(randi([1 length(IDX)], 1, numVariantsDisplay)),:)
+    else
+        fprintf('There were no survivors.\n')
     end
 fprintf('Non-surivors: \n')
     if ~isempty(nonIDX)
         mutatedGnome(nonIDX(randi([1 length(nonIDX)], 1, numVariantsDisplay)),:)    
+    else
+        fprintf('Everyone surivived.\n')
     end
 end
 
