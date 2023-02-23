@@ -42,12 +42,12 @@ for j=numOffspring:-1:1
 end
     numUniqueVariants = length(unique(string(mutatedGnome(:, phraseLocation))));
 
-
 IDX = selectorFunction(mutatedGnome, animal, selectedPhrase, 1);
     nonIDX = setdiff(1:length(mutatedGnome), IDX);
 
 fprintf('Generation: %i \n', g);
-fprintf('Produced %i offspring: %i maintained trait, %i mutated to generate %i variations.\n', numOffspring, length(IDX), numOffspring - length(IDX), numUniqueVariants);
+fprintf('Produced %i offspring: %i had the selected trait, %i were not selected with a total of %i variations.\n', numOffspring, length(IDX), numOffspring - length(IDX), numUniqueVariants);
+fprintf('The other trait')
 fprintf('Survivors: \n')
     if ~isempty(IDX)
         mutatedGnome(IDX(randi([1 length(IDX)], 1, numVariantsDisplay)),:)
