@@ -12,9 +12,6 @@ numVariantsDisplay = 5;
 
 % How many offsrping per generation    
     numOffspring = 10000;
-% How many generations
-    numGenerations = 2;
-% We only allow 1 survivor per generation for the next generation
 
 
 % Original: fox  Variants: dog cow cat bat fax bot box fog fix
@@ -22,6 +19,10 @@ numVariantsDisplay = 5;
 selectedPhrase = 'fog';
 selectionStrength = 0.7;
 
+%% System settings
+
+% How many generations
+    numGenerations = 1;
 
 outOf = 100000; % Probably do not change this value
 
@@ -66,11 +67,6 @@ fprintf('Non-surivors: \n')
         fprintf('Everyone surivived.\n')
     end
 end
-
-
-
-
-
 
 
 %% Genetic Code
