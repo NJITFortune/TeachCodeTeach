@@ -43,7 +43,7 @@ end
     numUniqueVariants = length(unique(string(mutatedGnome(:, phraseLocation))));
 
 
-IDX = selectorFunction(mutatedGnome, animal, 'fox', 1);
+IDX = selectorFunction(mutatedGnome, animal, selectedPhrase, 1);
     nonIDX = setdiff(1:length(mutatedGnome), IDX);
 
 fprintf('Generation: %i \n', g);
