@@ -27,9 +27,13 @@ outOf = 100000; % Probably do not change this value
 
 if length(selectedPhrase) == 3
     phraseLocation = animal;
+    otherPhrase = translategNum(geeNumOriginalCode,lookup);
+    otherPhrase = otherPhrase(object);
 end
 if length(selectedPhrase) == 4
     phraseLocation = object;
+    otherPhrase = translategNum(geeNumOriginalCode,lookup);
+    otherPhrase = otherPhrase(animal);
 end
 
 %% Mutate
@@ -46,8 +50,9 @@ IDX = selectorFunction(mutatedGnome, animal, selectedPhrase, 1);
     nonIDX = setdiff(1:length(mutatedGnome), IDX);
 
 fprintf('Generation: %i \n', g);
-fprintf('Produced %i offspring: %i had the selected trait, %i were not selected with a total of %i variations.\n', numOffspring, length(IDX), numOffspring - length(IDX), numUniqueVariants);
-fprintf('The other trait')
+fprintf('Produced %i offspring: %i had the selected trait %s.\n', numOffspring, length(IDX), selectedPhrase);
+fprintf('%i were not selected with a total of %i variations.\n', numOffspring - length(IDX), numUniqueVariants);
+fprintf('The other trait started as %s', otherPhrase)
 fprintf('Survivors: \n')
     if ~isempty(IDX)
         mutatedGnome(IDX(randi([1 length(IDX)], 1, numVariantsDisplay)),:)
