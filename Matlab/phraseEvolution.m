@@ -20,15 +20,17 @@ selectionStrength = 0.7;
 
 for g = 1:numGenerations
 
+
 for j=numOffspring:-1:1
     mutatedCode(j,:) = mutateSeq(geeNumOriginalCode, mutationRate, outOf);
     mutatedGnome(j,:) = translategNum(mutatedCode(j,:),lookup);
 end
+numUn
+
 
 IDX = selectorFunction(mutatedGnome, animal, 'fox', 1);
 
-
-fprintf('Generation: %i', g);
+fprintf('Generation: %i \n', g);
 fprintf('Produced %i offspring: %i maintained trait, %i mutated to generate %1 variations.\n', numOffspring, length(IDX), numOffspring - length(IDX), numUniqueVariants);
     mutatedGnome(IDX(randi([1 length(IDX)], 1, numVariantsDisplay)),:)
 
