@@ -19,7 +19,7 @@ numVariantsDisplay = 5;
 
 % Original: fox  Variants: dog cow cat bat fax bot box fog fix
 % Original: moon Variants: roof rope pope pole mole rail pail mail tape toll tale tool peon
-selectedPhrase = 'dog';
+selectedPhrase = 'fog';
 selectionStrength = 0.7;
 
 
