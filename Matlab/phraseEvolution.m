@@ -1,5 +1,3 @@
-clear all
-
 [animal, object, lookup, geeNumOriginalCode] = setUpGeneticCodes;
 
 %% User Settings
