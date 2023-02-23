@@ -2,25 +2,36 @@ clear all
 
 [animal, object, lookup] = setUpGeneticCodes;
 
-%% Settings
+%% User Settings
 
 % How many variants to show
 numVariantsDisplay = 10;
 
-mutationRate = 0.0125;
-outOf = 100000;
+    mutationRate = 0.0125;
+    outOf = 100000; % Probably do not change this value
 
 numOffspring = 10000;
-generations = 2;
+numGenerations = 2;
 
 selectedPhrase = 'fox';
 selectionStrength = 0.7;
 
-if length(selectedPhrase) == 3
-    phraseLocation = animal;
+%% Mutate
+
+for g = 1:numGenerations
+
+for j=numOffspring:-1:1
+    mutatedCode(j,:) = mutateSeq(geeNumOriginalCode, mutationRate, outOf);
+    mutatedGnome(j,:) = translategNum(mutatedCode(j,:),lookup);
 end
-if length(selectedPhrase) == 4
-    phraseLocations = object;
+
+IDX = selectorFunction(mutatedGnome, animal, 'fox', 1);
+
+
+fprintf('Generation: %i', g);
+fprintf('Produced %i offspring: %i maintained trait, %i mutated to generate %1 variations.\n', numOffspring, length(IDX), numOffspring - length(IDX), numUniqueVariants);
+    mutatedGnome(IDX(randi([1 length(IDX)], 1, numVariantsDisplay)),:)
+
 end
 
 
@@ -33,6 +44,17 @@ geeGnomeOriginal = translategNum(geeNumOriginalCode, lookup);
 
 fprintf('The original Phrase is:\n')
 geeGnomeOriginal
+
+
+if length(selectedPhrase) == 3
+    phraseLocation = animal;
+end
+if length(selectedPhrase) == 4
+    phraseLocations = object;
+end
+
+
+
 
 %% Genetic Code
 function [animal, object, lookup] = setUpGeneticCodes
@@ -88,26 +110,6 @@ lookup(44,:) = 'opli';
 lookup(45,:) = 'efln';
 
 end
-
-%% Mutate
-
-for g = 1:generations
-
-for j=numOffspring:-1:1
-    mutatedCode(j,:) = mutateSeq(geeNumOriginalCode, mutationRate, outOf);
-    mutatedGnome(j,:) = translategNum(mutatedCode(j,:),lookup);
-end
-
-IDX = selectorFunction(mutatedGnome, animal, 'fox', 1);
-
-
-fprintf('Generation: %i', g);
-fprintf('Produced %i offspring: %i maintained trait, %i mutated to generate %1 variations.\n', numOffspring, length(IDX), numOffspring - length(IDX), numUniqueVariants);
-    mutatedGnome(IDX(randi([1 length(IDX)], 1, numVariantsDisplay)),:)
-
-end
-
-
 
 
 %% Translate
