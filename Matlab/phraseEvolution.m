@@ -13,6 +13,8 @@ numVariantsDisplay = 10;
 numOffspring = 10000;
 numGenerations = 2;
 
+% Original: fox  Variants: dog cow cat bat fax bot box fog fix
+% Original: moon Variants: roof rope pope pole mole rail pail mail tape toll tale tool peon
 selectedPhrase = 'fox';
 selectionStrength = 0.7;
 
