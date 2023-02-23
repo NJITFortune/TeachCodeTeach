@@ -52,7 +52,7 @@ IDX = selectorFunction(mutatedGnome, animal, selectedPhrase, 1);
 fprintf('Generation: %i \n', g);
 fprintf('Produced %i offspring: %i had the selected trait %s.\n', numOffspring, length(IDX), selectedPhrase);
 fprintf('%i were not selected with a total of %i variations.\n', numOffspring - length(IDX), numUniqueVariants);
-fprintf('The other trait started as %s', otherPhrase)
+fprintf('The other trait started as %s \n', otherPhrase)
 fprintf('Survivors: \n')
     if ~isempty(IDX)
         mutatedGnome(IDX(randi([1 length(IDX)], 1, numVariantsDisplay)),:)
