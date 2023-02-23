@@ -7,16 +7,23 @@ clear all
 % How many variants to show
 numVariantsDisplay = 5;
 
+% Mutation rate per generation per letter (probability of changing)
     mutationRate = 0.01;
-    outOf = 100000; % Probably do not change this value
 
-numOffspring = 1000;
-numGenerations = 2;
+% How many offsrping per generation    
+    numOffspring = 1000;
+% How many generations
+    numGenerations = 2;
+% We only allow 1 survivor per generation for the next generation
+
 
 % Original: fox  Variants: dog cow cat bat fax bot box fog fix
 % Original: moon Variants: roof rope pope pole mole rail pail mail tape toll tale tool peon
-selectedPhrase = 'fox';
+selectedPhrase = 'dog';
 selectionStrength = 0.7;
+
+
+outOf = 100000; % Probably do not change this value
 
 if length(selectedPhrase) == 3
     phraseLocation = animal;
