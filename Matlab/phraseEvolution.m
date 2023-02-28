@@ -140,7 +140,7 @@ function geeOut = translategNum(geeNumIn, lookupSeq)
 end
 
 %% Mutate
-function newSeq = mutateSeq(oldSeq, mutateRate, outOfnum)
+function newSeq = (oldSeq, mutateRate, outOfnum)
 
 newSeq = oldSeq;
 
